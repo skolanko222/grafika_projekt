@@ -1,3 +1,0 @@
-C:/Users/bkono/OneDrive/Pulpit/IS_semestr_4/grafika/PROJEKT/grafika_projekt/SRC/Build/CMakeFiles/main.dir
-C:/Users/bkono/OneDrive/Pulpit/IS_semestr_4/grafika/PROJEKT/grafika_projekt/SRC/Build/CMakeFiles/edit_cache.dir
-C:/Users/bkono/OneDrive/Pulpit/IS_semestr_4/grafika/PROJEKT/grafika_projekt/SRC/Build/CMakeFiles/rebuild_cache.dir
