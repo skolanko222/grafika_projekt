@@ -16,36 +16,63 @@
 #include <wx/settings.h>
 #include <wx/string.h>
 #include <wx/sizer.h>
-#include <wx/tglbtn.h>
+#include <wx/button.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
+#include <wx/slider.h>
+#include <wx/filepicker.h>
 #include <wx/frame.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class MyFrame1
+/// Class MainFrame
 ///////////////////////////////////////////////////////////////////////////////
-class MyFrame1 : public wxFrame
+class MainFrame : public wxFrame
 {
 	private:
-
+		
 	protected:
-		wxPanel* m_panel2;
+		wxPanel* m_panel0;
 		wxPanel* m_panel1;
+		wxPanel* m_panel2;
 		wxPanel* m_panel3;
 		wxPanel* m_panel4;
 		wxPanel* m_panel5;
-		wxPanel* m_panel6;
-		wxToggleButton* m_toggleBtn1;
+		wxButton* m_button2;
+		wxButton* m_button3;
+		wxSlider* m_slider1;
+		wxFilePickerCtrl* m_filePicker2;
+
+
+
+		// Virtual event handlers, override them in your derived class
+		virtual void m_panel0OnPaint( wxPaintEvent& event ) { event.Skip(); } // main panel
+		virtual void m_panel0OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void m_panel1OnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void m_panel1OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void m_panel2OnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void m_panel2OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void m_panel3OnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void m_panel3OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void m_panel4OnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void m_panel4OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void m_panel5OnPaint( wxPaintEvent& event ) { event.Skip(); }
+		virtual void m_panel5OnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void m_button2OnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void m_button3OnButtonClick( wxCommandEvent& event ) { event.Skip(); }
+		virtual void m_slider1OnScroll( wxScrollEvent& event ) { event.Skip(); }
+		virtual void m_slider1OnSlider( wxCommandEvent& event ) { event.Skip(); }
+		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) { event.Skip(); }
+
 
 	public:
 
-		MyFrame1( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 776,479 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("RASTER GRAPHICS INTERPOLATION"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 623,345 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
-		~MyFrame1();
+		~MainFrame();
 
 };
 
