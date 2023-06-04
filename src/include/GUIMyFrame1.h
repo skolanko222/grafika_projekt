@@ -24,32 +24,23 @@ class GUIMyFrame1 : public MainFrame
 	private:
 		using size = short unsigned int;
 
-		size _width;
-		size _height;
+		size _width = wxDefaultSize.GetWidth(); // panel0 width
+		size _height = wxDefaultSize.GetHeight(); // panel0 height
+		wxSize _p0size = wxSize(_width, _height); // panel0 size
+		wxSize _pDownSize = wxSize(wxDefaultSize.GetWidth(), wxDefaultSize.GetHeight());
 
 		wxImage _Image;
 		wxBitmap _Bitmap;
+
+		void setPanelsOnLoad(wxString path = _("kotek.jpg"));
+		void setPanelSize();
 
 	public:
 
 		virtual void m_panel1OnPaint(wxPaintEvent& event) override;
 		virtual void m_panel0OnUpdateUI(wxUpdateUIEvent& event) override;
 
-		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) override 
-		{ 
-			wxString path = event.GetPath();
-			_Image.AddHandler(new wxJPEGHandler);
-			_Image.LoadFile(path);
-
-			_height = _Image.GetHeight();
-			_width = _Image.GetWidth();
-
-			m_panel0->SetSize(_width, _height);
-
-			_Bitmap = wxBitmap(_Image);
-			Refresh();
-		}
-
+		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) override;
 
 
 };
