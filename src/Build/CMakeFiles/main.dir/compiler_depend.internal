@@ -1008,13 +1008,21 @@ CMakeFiles/main.dir/src/GUI.cpp.obj
  C:/wxWidgets-3.2.2.1/include/wx/msw/button.h
  C:/wxWidgets-3.2.2.1/include/wx/slider.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/slider.h
+
  C:/wxWidgets-3.2.2.1/include/wx/frame.h
+ C:/wxWidgets-3.2.2.1/include/wx/filepicker.h
+ C:/wxWidgets-3.2.2.1/include/wx/pickerbase.h
+ C:/wxWidgets-3.2.2.1/include/wx/generic/filepickerg.h
+ C:/wxWidgets-3.2.2.1/include/wx/filedlg.h
+ C:/wxWidgets-3.2.2.1/include/wx/dialog.h
+
  C:/wxWidgets-3.2.2.1/include/wx/toplevel.h
  C:/wxWidgets-3.2.2.1/include/wx/nonownedwnd.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/nonownedwnd.h
  C:/wxWidgets-3.2.2.1/include/wx/weakref.h
  C:/wxWidgets-3.2.2.1/include/wx/meta/int2type.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/toplevel.h
+
  C:/wxWidgets-3.2.2.1/include/wx/statusbr.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/statusbar.h
  C:/wxWidgets-3.2.2.1/include/wx/tooltip.h
@@ -1025,6 +1033,7 @@ CMakeFiles/main.dir/src/GUI.cpp.obj
  C:/wxWidgets-3.2.2.1/include/wx/generic/filepickerg.h
  C:/wxWidgets-3.2.2.1/include/wx/filedlg.h
  C:/wxWidgets-3.2.2.1/include/wx/dialog.h
+
  C:/wxWidgets-3.2.2.1/include/wx/sharedptr.h
  C:/wxWidgets-3.2.2.1/include/wx/atomic.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/wrapwin.h
@@ -1246,6 +1255,7 @@ CMakeFiles/main.dir/src/GUI.cpp.obj
  C:/wxWidgets-3.2.2.1/include/wx/msw/filedlg.h
  C:/wxWidgets-3.2.2.1/include/wx/dirdlg.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/dirdlg.h
+
 
 CMakeFiles/main.dir/src/GUIMyFrame1.cpp.obj
  C:/Users/Dell/AGH/grafika/grafika_projekt/src/src/GUIMyFrame1.cpp
@@ -1572,23 +1582,7 @@ CMakeFiles/main.dir/src/GUIMyFrame1.cpp.obj
  C:/wxWidgets-3.2.2.1/include/wx/msw/button.h
  C:/wxWidgets-3.2.2.1/include/wx/slider.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/slider.h
- C:/wxWidgets-3.2.2.1/include/wx/frame.h
- C:/wxWidgets-3.2.2.1/include/wx/toplevel.h
- C:/wxWidgets-3.2.2.1/include/wx/nonownedwnd.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/nonownedwnd.h
- C:/wxWidgets-3.2.2.1/include/wx/weakref.h
- C:/wxWidgets-3.2.2.1/include/wx/meta/int2type.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/toplevel.h
- C:/wxWidgets-3.2.2.1/include/wx/statusbr.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/statusbar.h
- C:/wxWidgets-3.2.2.1/include/wx/tooltip.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/tooltip.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/frame.h
- C:/wxWidgets-3.2.2.1/include/wx/filepicker.h
- C:/wxWidgets-3.2.2.1/include/wx/pickerbase.h
- C:/wxWidgets-3.2.2.1/include/wx/generic/filepickerg.h
- C:/wxWidgets-3.2.2.1/include/wx/filedlg.h
- C:/wxWidgets-3.2.2.1/include/wx/dialog.h
+
  C:/wxWidgets-3.2.2.1/include/wx/sharedptr.h
  C:/wxWidgets-3.2.2.1/include/wx/atomic.h
  C:/wxWidgets-3.2.2.1/include/wx/msw/wrapwin.h
@@ -1704,135 +1698,5 @@ CMakeFiles/main.dir/src/GUIMyFrame1.cpp.obj
  C:/TDM-GCC-64/x86_64-w64-mingw32/include/errhandlingapi.h
  C:/TDM-GCC-64/x86_64-w64-mingw32/include/fibersapi.h
  C:/TDM-GCC-64/x86_64-w64-mingw32/include/fileapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/handleapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/heapapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/ioapiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/interlockedapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/jobapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/libloaderapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/memoryapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/namedpipeapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/namespaceapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/processenv.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/processthreadsapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/processtopologyapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/profileapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/realtimeapiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/securityappcontainer.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/securitybaseapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/synchapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/sysinfoapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/systemtopologyapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/threadpoolapiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/threadpoollegacyapiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/utilapiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wow64apiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winerror.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/fltwinerror.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/timezoneapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wingdi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/pshpack1.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winuser.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/tvout.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winnls.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/datetimeapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/stringapiset.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wincon.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winver.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winreg.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/reason.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winnetwk.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wnnc.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/virtdisk.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/cderr.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/dde.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/ddeml.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/dlgs.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/lzexpand.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/mmsystem.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/nb30.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpc.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcdce.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcdcep.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcnsi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcnterr.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcasync.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/shellapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winperf.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winsock.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wincrypt.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/bcrypt.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/ncrypt.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/dpapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winefs.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winscard.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wtypes.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcndr.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcnsip.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/rpcsal.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/ole2.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/objbase.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/combaseapi.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/wtypesbase.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/unknwnbase.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/objidlbase.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/cguid.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/objidl.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/unknwn.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/urlmon.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/oleidl.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/servprov.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/msxml.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/oaidl.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/propidl.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/oleauto.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winioctl.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winsmcrd.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winspool.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/prsht.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/commdlg.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/stralign.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/sec_api/stralign_s.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/winsvc.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/mcx.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/imm.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/psdk_inc/_ws1_undef.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/_bsd_types.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/inaddr.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/psdk_inc/_socket_types.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/psdk_inc/_fd_types.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/psdk_inc/_ip_types.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/psdk_inc/_wsadata.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/ws2def.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/psdk_inc/_wsa_errnos.h
- C:/TDM-GCC-64/x86_64-w64-mingw32/include/qos.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/dialog.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/filedlg.h
- C:/wxWidgets-3.2.2.1/include/wx/dirdlg.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/dirdlg.h
- C:/wxWidgets-3.2.2.1/include/wx/dcclient.h
- C:/wxWidgets-3.2.2.1/include/wx/dc.h
- C:/wxWidgets-3.2.2.1/include/wx/brush.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/brush.h
- C:/wxWidgets-3.2.2.1/include/wx/pen.h
- C:/wxWidgets-3.2.2.1/include/wx/peninfobase.h
- C:/wxWidgets-3.2.2.1/include/wx/msw/pen.h
- C:/wxWidgets-3.2.2.1/include/wx/affinematrix2d.h
- C:/wxWidgets-3.2.2.1/include/wx/affinematrix2dbase.h
- C:/wxWidgets-3.2.2.1/include/wx/geometry.h
- C:/wxWidgets-3.2.2.1/include/wx/dcbuffer.h
- C:/wxWidgets-3.2.2.1/include/wx/dcmemory.h
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/iostream
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/ostream
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/ios
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/basic_ios.h
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/locale_facets.h
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/cwctype
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/locale_facets.tcc
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/basic_ios.tcc
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/ostream.tcc
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/istream
- C:/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/10.3.0/include/c++/bits/istream.tcc
+
 

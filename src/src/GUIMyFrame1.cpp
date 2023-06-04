@@ -7,6 +7,7 @@ GUIMyFrame1::GUIMyFrame1(wxWindow *parent)
 	lupaX = _width/2;
 	lupaY = _height/2;
 	m_panel0->Bind(wxEVT_MOTION, GUIMyFrame1::Mouse_Move, this);
+
 }
 
 GUIMyFrame1::~GUIMyFrame1()
@@ -14,6 +15,7 @@ GUIMyFrame1::~GUIMyFrame1()
 
 	// m_panel0->Disconnect(wxEVT_MOTION, GUIMyFrame1::Mouse_Move, this);
 	// m_panel5->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel5OnUpdateUI ), NULL, this );
+
 }
 
 void GUIMyFrame1::m_panel1OnPaint(wxPaintEvent &event)
@@ -36,8 +38,6 @@ void GUIMyFrame1::m_panel1OnPaint(wxPaintEvent &event)
 	dc.DrawLine(lupaX - _pDownSize.GetHeight()/2., lupaY - _pDownSize.GetWidth()/2., lupaX - _pDownSize.GetHeight()/2., lupaY + _pDownSize.GetWidth()/2.);
 	dc.DrawLine(lupaX - _pDownSize.GetHeight()/2., lupaY + _pDownSize.GetWidth()/2., lupaX + _pDownSize.GetHeight()/2., lupaY + _pDownSize.GetWidth()/2.);
 	dc.DrawLine(lupaX + _pDownSize.GetHeight()/2., lupaY - _pDownSize.GetWidth()/2., lupaX + _pDownSize.GetHeight()/2., lupaY + _pDownSize.GetWidth()/2.);
-
-	
 
 }
 
@@ -63,7 +63,6 @@ void GUIMyFrame1::Mouse_Move(wxMouseEvent& event) {
 		lupaY = mY_temp;
 	Refresh();
 }
-
 
 void GUIMyFrame1::setPanelsOnLoad(wxString path)
 {

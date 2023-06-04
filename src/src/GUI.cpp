@@ -85,6 +85,9 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
 
+	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
+
 
 	bSizerMain->Add( bSizerButtons, 0, wxEXPAND, 5 );
 

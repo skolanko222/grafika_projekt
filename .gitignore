@@ -39,3 +39,6 @@
 *.yaml
 *.bin
 Makefile
+
+*.yaml
+
