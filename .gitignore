@@ -40,7 +40,5 @@
 *.bin
 Makefile
 *.yaml
-Build/CMakefiles
-Build/CMakeCache.txt
-Build/Makefile
-Build/Makefile2
+src/Build/CMakefiles
+src/Build/CMakeCache.txt
