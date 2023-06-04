@@ -1,3 +1,0 @@
-C:/Users/Dell/AGH/grafika/grafika_projekt/src/Build/CMakeFiles/main.dir
-C:/Users/Dell/AGH/grafika/grafika_projekt/src/Build/CMakeFiles/edit_cache.dir
-C:/Users/Dell/AGH/grafika/grafika_projekt/src/Build/CMakeFiles/rebuild_cache.dir
