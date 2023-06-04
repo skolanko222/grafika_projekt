@@ -26,13 +26,22 @@ class GUIMyFrame1 : public MainFrame
 	private:
 		using size = short unsigned int;
 
-		size _width = wxDefaultSize.GetWidth(); // panel0 width
-		size _height = wxDefaultSize.GetHeight(); // panel0 height
-		wxSize _p0size = wxSize(_width, _height); // panel0 size
-		wxSize _pDownSize = wxSize(wxDefaultSize.GetWidth(), wxDefaultSize.GetHeight());
+		size _width = wxDefaultSize.GetWidth(); // image width
+		size _height = wxDefaultSize.GetHeight(); // image height
+		
+		wxSize _p0size = wxSize(_width, _height); // main panel size
+		wxSize _pDownSize = wxSize(wxDefaultSize.GetWidth(), wxDefaultSize.GetHeight()); // zoom panel size
 
+		// center position of lupa
 		size lupaX;
 		size lupaY;
+
+		// zoom size
+		size lupaWidth;
+		size lupaHeight;
+
+		// zoom factor
+		double zoomFactor = 1;
     
 		wxImage _Image;
 		wxBitmap _Bitmap;
@@ -48,7 +57,7 @@ class GUIMyFrame1 : public MainFrame
 		virtual void m_panel0OnUpdateUI(wxUpdateUIEvent& event) override;
 
 		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) override;
-
+		virtual void m_slider1OnScroll( wxScrollEvent& event ) override;
 
 };
 
