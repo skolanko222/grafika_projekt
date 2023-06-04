@@ -81,12 +81,9 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	m_slider1 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizerButtons->Add( m_slider1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
-<<<<<<< HEAD
 
 	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
-=======
->>>>>>> 21c1841a62022e7f7d3a537a12a5fce92d1ad56a
 
 
 	bSizerMain->Add( bSizerButtons, 0, wxEXPAND, 5 );

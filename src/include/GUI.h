@@ -21,11 +21,8 @@
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/slider.h>
-<<<<<<< HEAD
-#include <wx/filepicker.h>
-=======
->>>>>>> 21c1841a62022e7f7d3a537a12a5fce92d1ad56a
 #include <wx/frame.h>
+#include <wx/filepicker.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +44,6 @@ class MainFrame : public wxFrame
 		wxButton* m_button2;
 		wxButton* m_button3;
 		wxSlider* m_slider1;
-<<<<<<< HEAD
 		wxFilePickerCtrl* m_filePicker2;
 
 
@@ -78,13 +74,6 @@ class MainFrame : public wxFrame
 	public:
 
 		MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("RASTER GRAPHICS INTERPOLATION"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 623,345 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
-=======
-
-	public:
-
-		MainFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("RASTER GRAPHICS INTERPOLATION"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 805,479 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
->>>>>>> 21c1841a62022e7f7d3a537a12a5fce92d1ad56a
-
 		~MainFrame();
 
 };
