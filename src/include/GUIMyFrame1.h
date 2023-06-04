@@ -23,7 +23,7 @@ class GUIMyFrame1 : public MainFrame
 		GUIMyFrame1( wxWindow* parent );
 	//// end generated class members
 		~GUIMyFrame1();
-	private:
+	protected:
 		using size = short unsigned int;
 
 		size _width = wxDefaultSize.GetWidth(); // image width
@@ -40,24 +40,37 @@ class GUIMyFrame1 : public MainFrame
 		size lupaWidth;
 		size lupaHeight;
 
+		// zoom rectange data
+		// x, y, width, height
+		wxRect lupaRect;
+
 		// zoom factor
 		double zoomFactor = 1;
     
 		wxImage _Image;
+		wxImage subImage;
 		wxBitmap _Bitmap;
 
 		void setPanelsOnLoad(wxString path = _("kotek.jpg"));
 		void setPanelSize();
+		void lupaImageCrop();
 
 		void Mouse_Move(wxMouseEvent& event);
 
 	public:
 
-		virtual void m_panel1OnPaint(wxPaintEvent& event) override;
+		virtual void m_panel0OnPaint(wxPaintEvent& event) override;
 		virtual void m_panel0OnUpdateUI(wxUpdateUIEvent& event) override;
 
 		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) override;
 		virtual void m_slider1OnScroll( wxScrollEvent& event ) override;
+
+		virtual void m_panel1OnPaint( wxPaintEvent& event ) override;
+		virtual void m_panel2OnPaint( wxPaintEvent& event ) override;
+		virtual void m_panel3OnPaint( wxPaintEvent& event ) override;
+		virtual void m_panel4OnPaint( wxPaintEvent& event ) override;
+		virtual void m_panel5OnPaint( wxPaintEvent& event ) override;
+
 
 };
 

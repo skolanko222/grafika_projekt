@@ -99,14 +99,19 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_panel0->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel1->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel1OnPaint ), NULL, this );
 	m_panel1->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel1OnUpdateUI ), NULL, this );
+	m_panel1->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel2->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel2OnPaint ), NULL, this );
 	m_panel2->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel2OnUpdateUI ), NULL, this );
+	m_panel2->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel3->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel3OnPaint ), NULL, this );
 	m_panel3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel3OnUpdateUI ), NULL, this );
+	m_panel3->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel4->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel4OnPaint ), NULL, this );
 	m_panel4->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel4OnUpdateUI ), NULL, this );
+	m_panel4->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel5->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel5OnPaint ), NULL, this );
 	m_panel5->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel5OnUpdateUI ), NULL, this );
+	m_panel5->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_button2->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::m_button2OnButtonClick ), NULL, this );
 	m_button3->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::m_button3OnButtonClick ), NULL, this );
 	m_slider1->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
@@ -127,6 +132,8 @@ MainFrame::~MainFrame()
 	// Disconnect Events
 	m_panel0->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel0OnPaint ), NULL, this );
 	m_panel0->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel0OnUpdateUI ), NULL, this );
+	
+	// TODO: Figure out why this is crashing xd
 	// m_panel0->Disconnect( wxEVT_ERASE_BACKGROUND, wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel1->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel1OnPaint ), NULL, this );
 	m_panel1->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel1OnUpdateUI ), NULL, this );

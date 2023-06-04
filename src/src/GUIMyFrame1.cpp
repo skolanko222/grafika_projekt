@@ -19,7 +19,7 @@ GUIMyFrame1::~GUIMyFrame1()
 
 }
 
-void GUIMyFrame1::m_panel1OnPaint(wxPaintEvent &event)
+void GUIMyFrame1::m_panel0OnPaint(wxPaintEvent &event)
 {
 
 	wxClientDC dc1(m_panel0);
@@ -41,6 +41,12 @@ void GUIMyFrame1::m_panel1OnPaint(wxPaintEvent &event)
 	dc.DrawLine(lupaX - lupaHeight/2., lupaY + lupaWidth/2., lupaX + lupaHeight/2., lupaY + lupaWidth/2.);
 	dc.DrawLine(lupaX + lupaHeight/2., lupaY - lupaWidth/2., lupaX + lupaHeight/2., lupaY + lupaWidth/2.);
 
+	// create rectange of 
+	// wxRect rect(lupaX - lupaHeight/2., lupaY - lupaWidth/2., lupaWidth, lupaHeight);
+
+	// wxBitmap _Bitmap = wxBitmap(subImage);
+	// if (subImage.IsOk())
+	// 	std::cout << "ok" << std::endl;
 }
 
 void GUIMyFrame1::m_panel0OnUpdateUI(wxUpdateUIEvent &event)
@@ -66,6 +72,9 @@ void GUIMyFrame1::Mouse_Move(wxMouseEvent& event) {
 		lupaX = mX_temp;
 	if(mY_temp < _height - lupaHeight/2. && mY_temp > lupaHeight/2.)
 		lupaY = mY_temp;
+
+
+	lupaImageCrop();
 	Refresh();
 }
 
@@ -85,6 +94,7 @@ void GUIMyFrame1::m_slider1OnScroll( wxScrollEvent& event )
 	if(lupaY < lupaHeight/2. )
 		lupaY += 1;
 	
+	lupaImageCrop();
 	Refresh();
 }
 
@@ -117,6 +127,8 @@ void GUIMyFrame1::setPanelsOnLoad(wxString path)
 
 	lupaWidth = _pDownSize.GetWidth()*zoomFactor;
 	lupaHeight = _pDownSize.GetHeight()*zoomFactor;
+	lupaX = _width/2;
+	lupaY = _height/2;
 
 	// sets panels size 
 	setPanelSize();
@@ -124,9 +136,24 @@ void GUIMyFrame1::setPanelsOnLoad(wxString path)
 	// sets frame size
 	this->SetMinSize(wxSize(_width + 330, _height + _pDownSize.GetY() + 20));
 
+
 	_Bitmap = wxBitmap(_Image);
+
+	lupaImageCrop();
 	Refresh();
 
+}
+
+void GUIMyFrame1::lupaImageCrop()
+{
+	std::cout << "x: " << lupaX << " y: " << lupaY << std::endl;
+	std::cout << "w " << lupaWidth << " h " << lupaHeight<< std::endl << std::endl;
+	lupaRect.SetX(lupaX - lupaWidth/2.);	
+	lupaRect.SetY(lupaY - lupaHeight/2.);	
+	lupaRect.SetWidth(lupaWidth);
+	lupaRect.SetHeight(lupaHeight);
+
+	subImage = _Image.GetSubImage(lupaRect);
 }
 
 void GUIMyFrame1::setPanelSize()
@@ -138,4 +165,62 @@ void GUIMyFrame1::setPanelSize()
 	m_panel4->SetSize(_pDownSize);
 	m_panel5->SetSize(_pDownSize);
 	
+}
+
+void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel1);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+	wxBitmap bitmap = wxBitmap(subImage);
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+
+
+}
+
+void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel2);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+}
+
+void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel3);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+
+}
+
+void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel4);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+
+}
+
+void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel5);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+
 }
