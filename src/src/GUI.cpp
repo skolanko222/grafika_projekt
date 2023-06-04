@@ -81,6 +81,12 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	m_slider1 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizerButtons->Add( m_slider1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+<<<<<<< HEAD
+
+	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
+=======
+>>>>>>> 21c1841a62022e7f7d3a537a12a5fce92d1ad56a
 
 
 	bSizerMain->Add( bSizerButtons, 0, wxEXPAND, 5 );
@@ -90,8 +96,62 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	this->Layout();
 
 	this->Centre( wxBOTH );
+
+	// Connect Events
+	m_panel0->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel0OnPaint ), NULL, this );
+	m_panel0->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel0OnUpdateUI ), NULL, this );
+	m_panel1->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel1OnPaint ), NULL, this );
+	m_panel1->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel1OnUpdateUI ), NULL, this );
+	m_panel2->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel2OnPaint ), NULL, this );
+	m_panel2->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel2OnUpdateUI ), NULL, this );
+	m_panel3->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel3OnPaint ), NULL, this );
+	m_panel3->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel3OnUpdateUI ), NULL, this );
+	m_panel4->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel4OnPaint ), NULL, this );
+	m_panel4->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel4OnUpdateUI ), NULL, this );
+	m_panel5->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel5OnPaint ), NULL, this );
+	m_panel5->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel5OnUpdateUI ), NULL, this );
+	m_button2->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::m_button2OnButtonClick ), NULL, this );
+	m_button3->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::m_button3OnButtonClick ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Connect( wxEVT_SLIDER, wxCommandEventHandler( MainFrame::m_slider1OnSlider ), NULL, this );
+	m_filePicker2->Connect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::m_filePicker2OnFileChanged ), NULL, this );
 }
 
 MainFrame::~MainFrame()
 {
+	// Disconnect Events
+	m_panel0->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel0OnPaint ), NULL, this );
+	m_panel0->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel0OnUpdateUI ), NULL, this );
+	m_panel1->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel1OnPaint ), NULL, this );
+	m_panel1->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel1OnUpdateUI ), NULL, this );
+	m_panel2->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel2OnPaint ), NULL, this );
+	m_panel2->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel2OnUpdateUI ), NULL, this );
+	m_panel3->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel3OnPaint ), NULL, this );
+	m_panel3->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel3OnUpdateUI ), NULL, this );
+	m_panel4->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel4OnPaint ), NULL, this );
+	m_panel4->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel4OnUpdateUI ), NULL, this );
+	m_panel5->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel5OnPaint ), NULL, this );
+	m_panel5->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel5OnUpdateUI ), NULL, this );
+	m_button2->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::m_button2OnButtonClick ), NULL, this );
+	m_button3->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrame::m_button3OnButtonClick ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
+	m_slider1->Disconnect( wxEVT_SLIDER, wxCommandEventHandler( MainFrame::m_slider1OnSlider ), NULL, this );
+	m_filePicker2->Disconnect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::m_filePicker2OnFileChanged ), NULL, this );
+
 }

@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+
+
+# CMakefiles
+*.cmake
+*.cmake.in
+*.rsp
+*.yaml
