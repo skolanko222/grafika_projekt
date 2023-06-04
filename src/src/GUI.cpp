@@ -81,12 +81,12 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	m_slider1 = new wxSlider( this, wxID_ANY, 50, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	bSizerButtons->Add( m_slider1, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
-<<<<<<< HEAD
 
 	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
 	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
-=======
->>>>>>> 21c1841a62022e7f7d3a537a12a5fce92d1ad56a
+
+	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
+	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
 
 
 	bSizerMain->Add( bSizerButtons, 0, wxEXPAND, 5 );
@@ -100,6 +100,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	// Connect Events
 	m_panel0->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel0OnPaint ), NULL, this );
 	m_panel0->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel0OnUpdateUI ), NULL, this );
+	m_panel0->Connect( wxEVT_ERASE_BACKGROUND , wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel1->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel1OnPaint ), NULL, this );
 	m_panel1->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel1OnUpdateUI ), NULL, this );
 	m_panel2->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel2OnPaint ), NULL, this );
@@ -130,6 +131,7 @@ MainFrame::~MainFrame()
 	// Disconnect Events
 	m_panel0->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel0OnPaint ), NULL, this );
 	m_panel0->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel0OnUpdateUI ), NULL, this );
+	// m_panel0->Disconnect( wxEVT_ERASE_BACKGROUND, wxEraseEventHandler( MainFrame::erase_bacground ), NULL, this );
 	m_panel1->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel1OnPaint ), NULL, this );
 	m_panel1->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel1OnUpdateUI ), NULL, this );
 	m_panel2->Disconnect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel2OnPaint ), NULL, this );

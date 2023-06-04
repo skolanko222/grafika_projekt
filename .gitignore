@@ -37,3 +37,8 @@
 *.cmake.in
 *.rsp
 *.yaml
+*.bin
+Makefile
+
+*.yaml
+
