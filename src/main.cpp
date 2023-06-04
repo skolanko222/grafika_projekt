@@ -1,6 +1,6 @@
 #include <wx/wx.h>
 #include <memory>
-#include "GUIMyFrame1.h"
+#include "GUIMainFrame.h"
 
 class MyApp : public wxApp {
 
@@ -16,7 +16,7 @@ IMPLEMENT_APP(MyApp);
 bool MyApp::OnInit() 
 {
  SetProcessDPIAware();
- wxFrame *mainFrame = new GUIMyFrame1(NULL);
+ wxFrame *mainFrame = new GUIMainFrame(NULL);
  mainFrame->Show(true);
  SetTopWindow(mainFrame);
 
