@@ -67,6 +67,9 @@ class MainFrame : public wxFrame
 		virtual void m_slider1OnSlider( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) { event.Skip(); }
 
+		// prevents flashing panel0
+		void erase_bacground(wxEraseEvent& event) {};
+
 
 	public:
 
