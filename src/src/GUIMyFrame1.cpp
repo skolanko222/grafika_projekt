@@ -157,7 +157,7 @@ void GUIMyFrame1::lupaImageCrop()
 	// std::cout << "w: " << lupaRect.GetWidth()  << " h: " << lupaRect.GetHeight() << std::endl;
 
 	size dif_x = lupaRect.GetX() + lupaWidth;
-	size dif_y = lupaRect.GetX() + lupaHeight;
+	size dif_y = lupaRect.GetY() + lupaHeight;
 	// std::cout << "dif: " << dif << "\n\n";
 
 	if(dif_x > _width)
