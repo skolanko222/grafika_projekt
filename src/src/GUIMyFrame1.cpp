@@ -1,4 +1,6 @@
 #include "GUIMyFrame1.h"
+#include <exception>
+
 
 GUIMyFrame1::GUIMyFrame1(wxWindow *parent)
 	: MainFrame(parent)
@@ -81,7 +83,6 @@ void GUIMyFrame1::Mouse_Move(wxMouseEvent& event) {
 void GUIMyFrame1::m_slider1OnScroll( wxScrollEvent& event )
 {
 	zoomFactor = 1. - event.GetPosition()/200.;
-	std::cout << zoomFactor << std::endl;
 	lupaWidth = _pDownSize.GetWidth()*zoomFactor;
 	lupaHeight = _pDownSize.GetHeight()*zoomFactor;
 	
@@ -146,14 +147,47 @@ void GUIMyFrame1::setPanelsOnLoad(wxString path)
 
 void GUIMyFrame1::lupaImageCrop()
 {
-	std::cout << "x: " << lupaX << " y: " << lupaY << std::endl;
-	std::cout << "w " << lupaWidth << " h " << lupaHeight<< std::endl << std::endl;
+	
 	lupaRect.SetX(lupaX - lupaWidth/2.);	
 	lupaRect.SetY(lupaY - lupaHeight/2.);	
 	lupaRect.SetWidth(lupaWidth);
 	lupaRect.SetHeight(lupaHeight);
 
+	// std::cout << "x: " << lupaRect.GetX()  << " y: " << lupaRect.GetY() << std::endl;
+	// std::cout << "w: " << lupaRect.GetWidth()  << " h: " << lupaRect.GetHeight() << std::endl;
+
+	size dif_x = lupaRect.GetX() + lupaWidth;
+	size dif_y = lupaRect.GetX() + lupaHeight;
+	// std::cout << "dif: " << dif << "\n\n";
+
+	if(dif_x > _width)
+	{
+		// std::cout << "new cor_x" << lupaRect.GetX() - (dif_x - _width) << std::endl;
+		lupaRect.SetX(lupaRect.GetX() - (dif_x - _width));
+
+		// dif_x = lupaRect.GetX() + lupaWidth;
+		// std::cout << "naprawa dif_x " << dif_x << std::endl;
+	}
+	if(dif_y > _height)
+	{
+		// std::cout << "new cor_x" << lupaRect.GetX() - (dif - _width) << std::endl;
+		lupaRect.SetY(lupaRect.GetY() - (dif_y - _height));
+
+		// dif_y = lupaRect.GetY() + lupaWidth;
+		// std::cout << "naprawa dif_y " << dif_y << std::endl;
+
+	}
+
+	if(lupaRect.GetX() < 0)
+		lupaRect.SetX(0);
+
+
+	if(lupaRect.GetY() < 0)
+		lupaRect.SetY(0);
+	
 	subImage = _Image.GetSubImage(lupaRect);
+	// std::cout << "\n\n";
+
 }
 
 void GUIMyFrame1::setPanelSize()
