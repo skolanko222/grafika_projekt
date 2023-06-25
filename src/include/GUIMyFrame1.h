@@ -44,11 +44,16 @@ class GUIMyFrame1 : public MainFrame
 		// x, y, width, height
 		wxRect lupaRect;
 
-		// zoom factor
-		double zoomFactor = 1;
+		// zoom factors
+		double cropFactor = 1.;
+		double zoomFactor = 1.;
     
 		wxImage _Image;
 		wxImage subImage;
+		
+		// array of zoomed images (to save as bitmap)
+		std::array<wxImage,5> _arrZoomedImages;
+
 		wxBitmap _Bitmap;
 
 		void setPanelsOnLoad(wxString path = _("kotek.jpg"));
