@@ -1,4 +1,5 @@
 #include "GUIMyFrame1.h"
+
 #include <exception>
 
 
@@ -212,7 +213,7 @@ void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 	// TODO: Implement zoom
 
 	wxImage copyImage = subImage.Copy();
-	std::cout << "zoomFactor: " << zoomFactor << std::endl;
+	// std::cout << "zoomFactor: " << zoomFactor << std::endl;
 	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
 	wxBitmap bitmap = wxBitmap(copyImage);
 	
@@ -231,6 +232,13 @@ void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
 	dc.Clear();
 
 	// TODO: Implement zoom
+
+	wxImage copyImage = subImage.Copy();
+	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
+	wxBitmap bitmap = wxBitmap(copyImage);
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+	_arrZoomedImages[1] = copyImage;
 }
 
 void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
@@ -242,6 +250,12 @@ void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
 
 	// TODO: Implement zoom
 
+	wxImage copyImage = subImage.Copy();
+	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
+	wxBitmap bitmap = wxBitmap(copyImage);
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+	_arrZoomedImages[2] = copyImage;
 }
 
 void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
@@ -253,6 +267,12 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 
 	// TODO: Implement zoom
 
+	wxImage copyImage = subImage.Copy();
+	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
+	wxBitmap bitmap = wxBitmap(copyImage);
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+	_arrZoomedImages[3] = copyImage;
 }
 
 void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
@@ -264,4 +284,30 @@ void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 
 	// TODO: Implement zoom
 
+	wxImage copyImage = subImage.Copy();
+	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
+	wxBitmap bitmap = wxBitmap(copyImage);
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+	_arrZoomedImages[4] = copyImage;
+}
+
+void GUIMyFrame1::m_button3OnButtonClick( wxCommandEvent& event )
+{
+	wxFileDialog saveFileDialog(this, _("Save BMP file"), "", "", "BMP files (*.bmp)|*.bmp", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
+	if (saveFileDialog.ShowModal() == wxID_CANCEL)
+		return;
+	wxFileOutputStream output_stream(saveFileDialog.GetPath());
+    if (!output_stream.IsOk())
+            return;
+	wxImage image = _arrZoomedImages[0];
+	image.Resize(wxSize(_arrZoomedImages[0].GetWidth()*5, _arrZoomedImages[0].GetHeight()), wxPoint(0,0));
+	for (size i = 1; i < _arrZoomedImages.size(); i++)
+	{
+		std::cout << "i: " << i << std::endl;
+		image.Paste(_arrZoomedImages[i], _arrZoomedImages[i].GetWidth()*i, 0);
+	
+	}
+	image.SaveFile(output_stream, wxBITMAP_TYPE_BMP);
+	
 }

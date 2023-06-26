@@ -50,6 +50,16 @@
 		"xstddef": "cpp",
 		"xstring": "cpp",
 		"xtr1common": "cpp",
-		"xutility": "cpp"
+		"xutility": "cpp",
+		"array": "cpp",
+		"*.tcc": "cpp",
+		"cstdarg": "cpp",
+		"cwctype": "cpp",
+		"deque": "cpp",
+		"memory_resource": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"string_view": "cpp",
+		"numbers": "cpp"
 	}
 }
