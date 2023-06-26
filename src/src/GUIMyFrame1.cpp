@@ -1,5 +1,16 @@
 #include "GUIMyFrame1.h"
 #include <exception>
+#include "wx/wxprec.h"
+#include "wx/image.h"
+#include "wx/log.h"
+#include "wx/utils.h"
+#include "wx/math.h"
+#include "wx/module.h"
+#include "wx/palette.h"
+#include "wx/intl.h"
+#include "wx/colour.h"
+#include "wx/wfstream.h"
+#include "wx/xpmdecod.h"
 
 
 GUIMyFrame1::GUIMyFrame1(wxWindow *parent)
@@ -202,9 +213,53 @@ void GUIMyFrame1::setPanelSize()
 	
 }
 
+
 void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel1);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+	wxImage copyImage = subImage.Copy();
+	//
+	const wxImageResizeQuality quality =  wxIMAGE_QUALITY_BILINEAR;
+	wxImage image2( copyImage.Scale( subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor, quality ) );
+	wxBitmap bitmap = wxBitmap(image2);
+	
+	
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+
+	_arrZoomedImages[0] = image2;
+
+}
+
+void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel2);
+	wxBufferedDC dc(&dc1);
+	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
+	dc.Clear();
+
+	// TODO: Implement zoom
+
+	wxImage copyImage = subImage.Copy();
+	//
+	wxBitmap bitmap = wxBitmap(copyImage);
+	
+	
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+
+	_arrZoomedImages[1] = copyImage;
+}
+
+//ORIGINAL OBJECT
+void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
+{
+	wxClientDC dc1(m_panel3);
 	wxBufferedDC dc(&dc1);
 	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
 	dc.Clear();
@@ -220,27 +275,7 @@ void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 	if (bitmap.IsOk())
 		dc.DrawBitmap(bitmap, 0, 0, false);
 
-	_arrZoomedImages[0] = copyImage;
-}
-
-void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
-{
-	wxClientDC dc1(m_panel2);
-	wxBufferedDC dc(&dc1);
-	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
-	dc.Clear();
-
-	// TODO: Implement zoom
-}
-
-void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
-{
-	wxClientDC dc1(m_panel3);
-	wxBufferedDC dc(&dc1);
-	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
-	dc.Clear();
-
-	// TODO: Implement zoom
+	_arrZoomedImages[2] = copyImage;
 
 }
 
@@ -253,6 +288,16 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 
 	// TODO: Implement zoom
 
+	wxImage copyImage = subImage.Copy();
+	//
+	wxBitmap bitmap = wxBitmap(copyImage);
+	
+	
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+
+	_arrZoomedImages[3] = copyImage;
+
 }
 
 void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
@@ -264,4 +309,13 @@ void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 
 	// TODO: Implement zoom
 
+	wxImage copyImage = subImage.Copy();
+	//
+	wxBitmap bitmap = wxBitmap(copyImage);
+	
+	
+	if (bitmap.IsOk())
+		dc.DrawBitmap(bitmap, 0, 0, false);
+
+	_arrZoomedImages[0] = copyImage;
 }
