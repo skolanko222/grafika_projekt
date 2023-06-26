@@ -42,3 +42,4 @@ Makefile
 *.yaml
 src/Build/CMakefiles
 src/Build/CMakeCache.txt
+.vscode
