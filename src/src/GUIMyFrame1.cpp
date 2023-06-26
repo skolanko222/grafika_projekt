@@ -82,9 +82,10 @@ void GUIMyFrame1::Mouse_Move(wxMouseEvent& event) {
 
 void GUIMyFrame1::m_slider1OnScroll( wxScrollEvent& event )
 {
-	zoomFactor = 1. - event.GetPosition()/200.;
-	lupaWidth = _pDownSize.GetWidth()*zoomFactor;
-	lupaHeight = _pDownSize.GetHeight()*zoomFactor;
+	cropFactor = 1. - event.GetPosition()/200.;
+	zoomFactor = -2*cropFactor  + 3.;
+	lupaWidth = _pDownSize.GetWidth()*cropFactor;
+	lupaHeight = _pDownSize.GetHeight()*cropFactor;
 	
 	if(lupaX > _width - lupaWidth/2. )
 		lupaX -= 1;
@@ -126,8 +127,8 @@ void GUIMyFrame1::setPanelsOnLoad(wxString path)
 	// calculates size of zoomed panels
 	_pDownSize.Set(_width/4 -20, _width/4 -20);
 
-	lupaWidth = _pDownSize.GetWidth()*zoomFactor;
-	lupaHeight = _pDownSize.GetHeight()*zoomFactor;
+	lupaWidth = _pDownSize.GetWidth()*cropFactor;
+	lupaHeight = _pDownSize.GetHeight()*cropFactor;
 	lupaX = _width/2;
 	lupaY = _height/2;
 
@@ -209,11 +210,17 @@ void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 	dc.Clear();
 
 	// TODO: Implement zoom
-	wxBitmap bitmap = wxBitmap(subImage);
+
+	wxImage copyImage = subImage.Copy();
+	std::cout << "zoomFactor: " << zoomFactor << std::endl;
+	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
+	wxBitmap bitmap = wxBitmap(copyImage);
+	
+	
 	if (bitmap.IsOk())
 		dc.DrawBitmap(bitmap, 0, 0, false);
 
-
+	_arrZoomedImages[0] = copyImage;
 }
 
 void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
