@@ -76,6 +76,8 @@ class GUIMyFrame1 : public MainFrame
 		virtual void m_panel4OnPaint( wxPaintEvent& event ) override;
 		virtual void m_panel5OnPaint( wxPaintEvent& event ) override;
 
+		virtual void m_button3OnButtonClick( wxCommandEvent& event ) override;
+
 
 };
 

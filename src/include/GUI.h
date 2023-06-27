@@ -24,6 +24,7 @@
 #include <wx/filepicker.h>
 #include <wx/frame.h>
 #include <wx/filepicker.h>
+#include <wx/wfstream.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
