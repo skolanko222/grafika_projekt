@@ -214,7 +214,7 @@ void GUIMyFrame1::setPanelSize()
 	
 }
 
-
+//Interpolacja dwuliniowa (Bilinear interpolation)
 void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel1);
@@ -237,6 +237,7 @@ void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 
 }
 
+//Bicubic interpolation b-spline
 void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel2);
@@ -248,13 +249,15 @@ void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
 
 	wxImage copyImage = subImage.Copy();
 	//
-	wxBitmap bitmap = wxBitmap(copyImage);
+	const wxImageResizeQuality quality =  wxIMAGE_QUALITY_BICUBIC;
+	wxImage image2( copyImage.Scale( subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor, quality ) );
+	wxBitmap bitmap = wxBitmap(image2);
 	
 	
 	if (bitmap.IsOk())
 		dc.DrawBitmap(bitmap, 0, 0, false);
 
-	_arrZoomedImages[1] = copyImage;
+	_arrZoomedImages[1] = image2;
 }
 
 //ORIGINAL OBJECT
@@ -276,47 +279,81 @@ void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
 	if (bitmap.IsOk())
 		dc.DrawBitmap(bitmap, 0, 0, false);
 
-<<<<<<< HEAD
 	_arrZoomedImages[2] = copyImage;
-=======
-	_arrZoomedImages[0] = copyImage;
+
 }
 
-void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
+// Funkcja dokonująca interpolacji metodą Lanczosa
+wxImage InterpolateImage_Lanchos(const wxImage& image, double scaleFactor)
 {
-	wxClientDC dc1(m_panel2);
-	wxBufferedDC dc(&dc1);
-	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
-	dc.Clear();
+    int width = image.GetWidth();
+    int height = image.GetHeight();
 
-	// TODO: Implement zoom
+    int newWidth = static_cast<int>(width * scaleFactor);
+    int newHeight = static_cast<int>(height * scaleFactor);
 
-	wxImage copyImage = subImage.Copy();
-	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
-	wxBitmap bitmap = wxBitmap(copyImage);
-	if (bitmap.IsOk())
-		dc.DrawBitmap(bitmap, 0, 0, false);
-	_arrZoomedImages[1] = copyImage;
+    wxImage newImage(newWidth, newHeight);
+
+    for (int y = 0; y < newHeight; ++y)
+    {
+        for (int x = 0; x < newWidth; ++x)
+        {
+            double srcX = static_cast<double>(x) / scaleFactor;
+            double srcY = static_cast<double>(y) / scaleFactor;
+
+            int x1 = static_cast<int>(srcX);
+            int y1 = static_cast<int>(srcY);
+
+            int x2 = x1 + 1;
+            int y2 = y1 + 1;
+
+            if (x2 >= width)
+                x2 = width - 1;
+            if (y2 >= height)
+                y2 = height - 1;
+
+            double fractionX = srcX - x1;
+            double fractionY = srcY - y1;
+
+            unsigned char r1 = image.GetRed(x1, y1);
+            unsigned char g1 = image.GetGreen(x1, y1);
+            unsigned char b1 = image.GetBlue(x1, y1);
+
+            unsigned char r2 = image.GetRed(x2, y1);
+            unsigned char g2 = image.GetGreen(x2, y1);
+            unsigned char b2 = image.GetBlue(x2, y1);
+
+            unsigned char r3 = image.GetRed(x1, y2);
+            unsigned char g3 = image.GetGreen(x1, y2);
+            unsigned char b3 = image.GetBlue(x1, y2);
+
+            unsigned char r4 = image.GetRed(x2, y2);
+            unsigned char g4 = image.GetGreen(x2, y2);
+            unsigned char b4 = image.GetBlue(x2, y2);
+
+            int r = static_cast<int>((r1 * (1 - fractionX) * (1 - fractionY) +
+                                      r2 * fractionX * (1 - fractionY) +
+                                      r3 * (1 - fractionX) * fractionY +
+                                      r4 * fractionX * fractionY) + 0.5);
+
+            int g = static_cast<int>((g1 * (1 - fractionX) * (1 - fractionY) +
+                                      g2 * fractionX * (1 - fractionY) +
+                                      g3 * (1 - fractionX) * fractionY +
+                                      g4 * fractionX * fractionY) + 0.5);
+
+            int b = static_cast<int>((b1 * (1 - fractionX) * (1 - fractionY) +
+                                      b2 * fractionX * (1 - fractionY) +
+                                      b3 * (1 - fractionX) * fractionY +
+                                      b4 * fractionX * fractionY) + 0.5);
+
+            newImage.SetRGB(x, y, r, g, b);
+        }
+    }
+
+ return newImage;  
 }
 
-void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
-{
-	wxClientDC dc1(m_panel3);
-	wxBufferedDC dc(&dc1);
-	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
-	dc.Clear();
-
-	// TODO: Implement zoom
->>>>>>> origin/save_zoomed
-
-	wxImage copyImage = subImage.Copy();
-	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
-	wxBitmap bitmap = wxBitmap(copyImage);
-	if (bitmap.IsOk())
-		dc.DrawBitmap(bitmap, 0, 0, false);
-	_arrZoomedImages[2] = copyImage;
-}
-
+//Lanczos
 void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel4);
@@ -327,8 +364,7 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 	// TODO: Implement zoom
 
 	wxImage copyImage = subImage.Copy();
-<<<<<<< HEAD
-	//
+	copyImage = InterpolateImage_Lanchos(copyImage, zoomFactor);
 	wxBitmap bitmap = wxBitmap(copyImage);
 	
 	
@@ -337,15 +373,92 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 
 	_arrZoomedImages[3] = copyImage;
 
-=======
-	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
-	wxBitmap bitmap = wxBitmap(copyImage);
-	if (bitmap.IsOk())
-		dc.DrawBitmap(bitmap, 0, 0, false);
-	_arrZoomedImages[3] = copyImage;
->>>>>>> origin/save_zoomed
 }
 
+double MitchellFilter(double p0, double p1, double p2, double p3, double t)
+{
+    double q0 = (-(1.0 / 6.0) * t + 0.5 * t * t - 0.5 * t * t * t);
+    double q1 = (0.5 - t * t + 0.5 * t * t * t);
+    double q2 = (-(1.0 / 3.0) + 0.5 * t + 0.5 * t * t - t * t * t * 0.5);
+    double q3 = (t * t * 0.5 - 0.5 * t * t * t);
+    return p0 * q0 + p1 * q1 + p2 * q2 + p3 * q3;
+}
+
+wxImage InterpolateImage_Mitchell(const wxImage& image, double scaleFactor)
+{
+	int width = image.GetWidth();
+	int height = image.GetHeight();
+
+	int newWidth = static_cast<int>(width * scaleFactor);
+	int newHeight = static_cast<int>(height * scaleFactor);
+
+	wxImage newImage(newWidth, newHeight);
+
+	for (int y = 0; y < newHeight; ++y)
+	{
+		for (int x = 0; x < newWidth; ++x)
+		{
+			double srcX = static_cast<double>(x) / scaleFactor;
+			double srcY = static_cast<double>(y) / scaleFactor;
+ 			int x1 = static_cast<int>(srcX);
+            int y1 = static_cast<int>(srcY);
+
+            int x0 = x1 - 1;
+            int y0 = y1 - 1;
+
+            int x2 = x1 + 1;
+            int y2 = y1 + 1;
+
+            int x3 = x1 + 2;
+            int y3 = y1 + 2;
+
+            if (x0 < 0) x0 = 0;
+            if (y0 < 0) y0 = 0;
+            if (x2 >= width) x2 = width - 1;
+            if (y2 >= height) y2 = height - 1;
+            if (x3 >= width) x3 = width - 1;
+            if (y3 >= height) y3 = height - 1;
+
+            double fractionX = srcX - x1;
+            double fractionY = srcY - y1;
+
+            double p0x = MitchellFilter(image.GetRed(x0, y0), image.GetRed(x1, y0), image.GetRed(x2, y0), image.GetRed(x3, y0), fractionX);
+            double p1x = MitchellFilter(image.GetRed(x0, y1), image.GetRed(x1, y1), image.GetRed(x2, y1), image.GetRed(x3, y1), fractionX);
+            double p2x = MitchellFilter(image.GetRed(x0, y2), image.GetRed(x1, y2), image.GetRed(x2, y2), image.GetRed(x3, y2), fractionX);
+            double p3x = MitchellFilter(image.GetRed(x0, y3), image.GetRed(x1, y3), image.GetRed(x2, y3), image.GetRed(x3, y3), fractionX);
+
+            double p0y = MitchellFilter(p0x, p1x, p2x, p3x, fractionY);
+
+            p0x = MitchellFilter(image.GetGreen(x0, y0), image.GetGreen(x1, y0), image.GetGreen(x2, y0), image.GetGreen(x3, y0), fractionX);
+            p1x = MitchellFilter(image.GetGreen(x0, y1), image.GetGreen(x1, y1), image.GetGreen(x2, y1), image.GetGreen(x3, y1), fractionX);
+            p2x = MitchellFilter(image.GetGreen(x0, y2), image.GetGreen(x1, y2), image.GetGreen(x2, y2), image.GetGreen(x3, y2), fractionX);
+            p3x = MitchellFilter(image.GetGreen(x0, y3), image.GetGreen(x1, y3), image.GetGreen(x2, y3), image.GetGreen(x3, y3), fractionX);
+
+            double p1y = MitchellFilter(p0x, p1x, p2x, p3x, fractionY);
+
+            p0x = MitchellFilter(image.GetBlue(x0, y0), image.GetBlue(x1, y0), image.GetBlue(x2, y0), image.GetBlue(x3, y0), fractionX);
+            p1x = MitchellFilter(image.GetBlue(x0, y1), image.GetBlue(x1, y1), image.GetBlue(x2, y1), image.GetBlue(x3, y1), fractionX);
+            p2x = MitchellFilter(image.GetBlue(x0, y2), image.GetBlue(x1, y2), image.GetBlue(x2, y2), image.GetBlue(x3, y2), fractionX);
+            p3x = MitchellFilter(image.GetBlue(x0, y3), image.GetBlue(x1, y3), image.GetBlue(x2, y3), image.GetBlue(x3, y3), fractionX);
+
+            double p2y = MitchellFilter(p0x, p1x, p2x, p3x, fractionY);
+
+            int r = static_cast<int>(p0y + 0.5);
+            int g = static_cast<int>(p1y + 0.5);
+            int b = static_cast<int>(p2y + 0.5);
+
+            newImage.SetRGB(x, y, r, g, b);
+        }
+    }
+
+    return newImage;
+
+
+}
+
+
+
+//Mitchel
 void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel5);
@@ -356,40 +469,13 @@ void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 	// TODO: Implement zoom
 
 	wxImage copyImage = subImage.Copy();
-<<<<<<< HEAD
 	//
+	copyImage = InterpolateImage_Mitchell(copyImage, zoomFactor);
 	wxBitmap bitmap = wxBitmap(copyImage);
 	
 	
 	if (bitmap.IsOk())
 		dc.DrawBitmap(bitmap, 0, 0, false);
 
-	_arrZoomedImages[0] = copyImage;
-=======
-	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
-	wxBitmap bitmap = wxBitmap(copyImage);
-	if (bitmap.IsOk())
-		dc.DrawBitmap(bitmap, 0, 0, false);
 	_arrZoomedImages[4] = copyImage;
-}
-
-void GUIMyFrame1::m_button3OnButtonClick( wxCommandEvent& event )
-{
-	wxFileDialog saveFileDialog(this, _("Save BMP file"), "", "", "BMP files (*.bmp)|*.bmp", wxFD_SAVE|wxFD_OVERWRITE_PROMPT);
-	if (saveFileDialog.ShowModal() == wxID_CANCEL)
-		return;
-	wxFileOutputStream output_stream(saveFileDialog.GetPath());
-    if (!output_stream.IsOk())
-            return;
-	wxImage image = _arrZoomedImages[0];
-	image.Resize(wxSize(_arrZoomedImages[0].GetWidth()*5, _arrZoomedImages[0].GetHeight()), wxPoint(0,0));
-	for (size i = 1; i < _arrZoomedImages.size(); i++)
-	{
-		std::cout << "i: " << i << std::endl;
-		image.Paste(_arrZoomedImages[i], _arrZoomedImages[i].GetWidth()*i, 0);
-	
-	}
-	image.SaveFile(output_stream, wxBITMAP_TYPE_BMP);
-	
->>>>>>> origin/save_zoomed
 }
