@@ -22,6 +22,7 @@ GUIMyFrame1::GUIMyFrame1(wxWindow *parent)
 	lupaY = _height/2;
 	m_slider1->SetValue(0);
 	m_panel0->Bind(wxEVT_MOTION, GUIMyFrame1::Mouse_Move, this);
+	m_panel0->Bind(wxEVT_LEFT_DOWN, GUIMyFrame1::LMB_click, this);
 
 }
 
@@ -68,6 +69,17 @@ void GUIMyFrame1::m_panel0OnUpdateUI(wxUpdateUIEvent &event)
 	setPanelSize();
 }
 
+void GUIMyFrame1::LMB_click(wxMouseEvent& event)
+{
+	if(LMB_clicked)
+		LMB_clicked = false;
+	else
+		LMB_clicked = true;
+	
+	lupaImageCrop();
+	Refresh();
+}
+
 void GUIMyFrame1::m_filePicker2OnFileChanged(wxFileDirPickerEvent &event)
 {
 	wxString path = event.GetPath();
@@ -82,6 +94,9 @@ void GUIMyFrame1::Mouse_Move(wxMouseEvent& event) {
 	// std::cout << "x_p: " << _p0size.GetWidth() << " y_p: " << _p0size.GetHeight()<< std::endl;
 
 	// checks if mouse is in image
+	if(LMB_clicked)
+		return;
+
 	if(mX_temp < _width - lupaWidth/2. && mX_temp > lupaWidth/2.)
 		lupaX = mX_temp;
 	if(mY_temp < _height - lupaHeight/2. && mY_temp > lupaHeight/2.)
@@ -222,9 +237,7 @@ void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
 	dc.Clear();
 
-	// TODO: Implement zoom
 	wxImage copyImage = subImage.Copy();
-	//
 	const wxImageResizeQuality quality =  wxIMAGE_QUALITY_BILINEAR;
 	wxImage image2( copyImage.Scale( subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor, quality ) );
 	wxBitmap bitmap = wxBitmap(image2);
@@ -245,10 +258,7 @@ void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
 	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
 	dc.Clear();
 
-	// TODO: Implement zoom
-
 	wxImage copyImage = subImage.Copy();
-	//
 	const wxImageResizeQuality quality =  wxIMAGE_QUALITY_BICUBIC;
 	wxImage image2( copyImage.Scale( subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor, quality ) );
 	wxBitmap bitmap = wxBitmap(image2);
@@ -268,10 +278,7 @@ void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
 	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
 	dc.Clear();
 
-	// TODO: Implement zoom
-
 	wxImage copyImage = subImage.Copy();
-	// std::cout << "zoomFactor: " << zoomFactor << std::endl;
 	copyImage.Rescale(subImage.GetWidth()*zoomFactor, subImage.GetHeight()*zoomFactor);
 	wxBitmap bitmap = wxBitmap(copyImage);
 	
@@ -361,12 +368,9 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
 	dc.Clear();
 
-	// TODO: Implement zoom
-
 	wxImage copyImage = subImage.Copy();
 	copyImage = InterpolateImage_Lanchos(copyImage, zoomFactor);
 	wxBitmap bitmap = wxBitmap(copyImage);
-	
 	
 	if (bitmap.IsOk())
 		dc.DrawBitmap(bitmap, 0, 0, false);
@@ -375,90 +379,56 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 
 }
 
-double MitchellFilter(double p0, double p1, double p2, double p3, double t)
+//kod do hermita
+wxImage InterpolateImage_Hermit(const wxImage& image, double factor)
 {
-    double q0 = (-(1.0 / 6.0) * t + 0.5 * t * t - 0.5 * t * t * t);
-    double q1 = (0.5 - t * t + 0.5 * t * t * t);
-    double q2 = (-(1.0 / 3.0) + 0.5 * t + 0.5 * t * t - t * t * t * 0.5);
-    double q3 = (t * t * 0.5 - 0.5 * t * t * t);
-    return p0 * q0 + p1 * q1 + p2 * q2 + p3 * q3;
-}
-
-wxImage InterpolateImage_Mitchell(const wxImage& image, double scaleFactor)
-{
-	int width = image.GetWidth();
-	int height = image.GetHeight();
-
-	int newWidth = static_cast<int>(width * scaleFactor);
-	int newHeight = static_cast<int>(height * scaleFactor);
-
-	wxImage newImage(newWidth, newHeight);
-
-	for (int y = 0; y < newHeight; ++y)
-	{
-		for (int x = 0; x < newWidth; ++x)
-		{
-			double srcX = static_cast<double>(x) / scaleFactor;
-			double srcY = static_cast<double>(y) / scaleFactor;
- 			int x1 = static_cast<int>(srcX);
-            int y1 = static_cast<int>(srcY);
-
-            int x0 = x1 - 1;
-            int y0 = y1 - 1;
-
-            int x2 = x1 + 1;
-            int y2 = y1 + 1;
-
-            int x3 = x1 + 2;
-            int y3 = y1 + 2;
-
-            if (x0 < 0) x0 = 0;
-            if (y0 < 0) y0 = 0;
-            if (x2 >= width) x2 = width - 1;
-            if (y2 >= height) y2 = height - 1;
-            if (x3 >= width) x3 = width - 1;
-            if (y3 >= height) y3 = height - 1;
-
-            double fractionX = srcX - x1;
-            double fractionY = srcY - y1;
-
-            double p0x = MitchellFilter(image.GetRed(x0, y0), image.GetRed(x1, y0), image.GetRed(x2, y0), image.GetRed(x3, y0), fractionX);
-            double p1x = MitchellFilter(image.GetRed(x0, y1), image.GetRed(x1, y1), image.GetRed(x2, y1), image.GetRed(x3, y1), fractionX);
-            double p2x = MitchellFilter(image.GetRed(x0, y2), image.GetRed(x1, y2), image.GetRed(x2, y2), image.GetRed(x3, y2), fractionX);
-            double p3x = MitchellFilter(image.GetRed(x0, y3), image.GetRed(x1, y3), image.GetRed(x2, y3), image.GetRed(x3, y3), fractionX);
-
-            double p0y = MitchellFilter(p0x, p1x, p2x, p3x, fractionY);
-
-            p0x = MitchellFilter(image.GetGreen(x0, y0), image.GetGreen(x1, y0), image.GetGreen(x2, y0), image.GetGreen(x3, y0), fractionX);
-            p1x = MitchellFilter(image.GetGreen(x0, y1), image.GetGreen(x1, y1), image.GetGreen(x2, y1), image.GetGreen(x3, y1), fractionX);
-            p2x = MitchellFilter(image.GetGreen(x0, y2), image.GetGreen(x1, y2), image.GetGreen(x2, y2), image.GetGreen(x3, y2), fractionX);
-            p3x = MitchellFilter(image.GetGreen(x0, y3), image.GetGreen(x1, y3), image.GetGreen(x2, y3), image.GetGreen(x3, y3), fractionX);
-
-            double p1y = MitchellFilter(p0x, p1x, p2x, p3x, fractionY);
-
-            p0x = MitchellFilter(image.GetBlue(x0, y0), image.GetBlue(x1, y0), image.GetBlue(x2, y0), image.GetBlue(x3, y0), fractionX);
-            p1x = MitchellFilter(image.GetBlue(x0, y1), image.GetBlue(x1, y1), image.GetBlue(x2, y1), image.GetBlue(x3, y1), fractionX);
-            p2x = MitchellFilter(image.GetBlue(x0, y2), image.GetBlue(x1, y2), image.GetBlue(x2, y2), image.GetBlue(x3, y2), fractionX);
-            p3x = MitchellFilter(image.GetBlue(x0, y3), image.GetBlue(x1, y3), image.GetBlue(x2, y3), image.GetBlue(x3, y3), fractionX);
-
-            double p2y = MitchellFilter(p0x, p1x, p2x, p3x, fractionY);
-
-            int r = static_cast<int>(p0y + 0.5);
-            int g = static_cast<int>(p1y + 0.5);
-            int b = static_cast<int>(p2y + 0.5);
-
-            newImage.SetRGB(x, y, r, g, b);
+    wxImage interpolatedImage(image.GetWidth() * factor, image.GetHeight() * factor);
+    
+    if (image.IsOk() && interpolatedImage.IsOk() &&
+        interpolatedImage.GetWidth() > 0 && interpolatedImage.GetHeight() > 0)
+    {
+        for (int y = 0; y < interpolatedImage.GetHeight(); y++)
+        {
+            for (int x = 0; x < interpolatedImage.GetWidth(); x++)
+            {
+                double srcX = x / factor;
+                double srcY = y / factor;
+                
+                int x0 = static_cast<int>(srcX);
+                int y0 = static_cast<int>(srcY);
+                
+                if (x0 >= 0 && x0 < image.GetWidth() - 1 && y0 >= 0 && y0 < image.GetHeight() - 1)
+                {
+                    double dx = srcX - x0;
+                    double dy = srcY - y0;
+                    
+                    double red = image.GetRed(wxCoord(x0), wxCoord(y0)) * (1 - dx) * (1 - dy) +
+                                 image.GetRed(wxCoord(x0 + 1), wxCoord(y0)) * dx * (1 - dy) +
+                                 image.GetRed(wxCoord(x0), wxCoord(y0 + 1)) * (1 - dx) * dy +
+                                 image.GetRed(wxCoord(x0 + 1), wxCoord(y0 + 1)) * dx * dy;
+                    
+                    double green = image.GetGreen(wxCoord(x0), wxCoord(y0)) * (1 - dx) * (1 - dy) +
+                                   image.GetGreen(wxCoord(x0 + 1), wxCoord(y0)) * dx * (1 - dy) +
+                                   image.GetGreen(wxCoord(x0), wxCoord(y0 + 1)) * (1 - dx) * dy +
+                                   image.GetGreen(wxCoord(x0 + 1), wxCoord(y0 + 1)) * dx * dy;
+    
+                    double blue = image.GetBlue(wxCoord(x0), wxCoord(y0)) * (1 - dx) * (1 - dy) +
+                                  image.GetBlue(wxCoord(x0 + 1), wxCoord(y0)) * dx * (1 - dy) +
+                                  image.GetBlue(wxCoord(x0), wxCoord(y0 + 1)) * (1 - dx) * dy +
+                                  image.GetBlue(wxCoord(x0 + 1), wxCoord(y0 + 1)) * dx * dy;
+                    
+                    interpolatedImage.SetRGB(x, y, static_cast<unsigned char>(red),
+                                             static_cast<unsigned char>(green),
+                                             static_cast<unsigned char>(blue));
+                }
+            }
         }
     }
-
-    return newImage;
-
-
+    return interpolatedImage;
 }
 
 
-
-//Mitchel
+//Hermit
 void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel5);
@@ -466,11 +436,8 @@ void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 	dc.SetBackground(wxBrush(RGB(255, 255, 255)));
 	dc.Clear();
 
-	// TODO: Implement zoom
-
 	wxImage copyImage = subImage.Copy();
-	//
-	copyImage = InterpolateImage_Mitchell(copyImage, zoomFactor);
+	copyImage = InterpolateImage_Hermit(copyImage, zoomFactor);
 	wxBitmap bitmap = wxBitmap(copyImage);
 	
 	

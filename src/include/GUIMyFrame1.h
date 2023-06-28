@@ -56,11 +56,17 @@ class GUIMyFrame1 : public MainFrame
 
 		wxBitmap _Bitmap;
 
+		
+		//static lupa
+		bool LMB_clicked = false;
+
 		void setPanelsOnLoad(wxString path = _("kotek.jpg"));
 		void setPanelSize();
 		void lupaImageCrop();
 
 		void Mouse_Move(wxMouseEvent& event);
+		void LMB_click(wxMouseEvent& event);
+
 
 	public:
 
@@ -77,6 +83,8 @@ class GUIMyFrame1 : public MainFrame
 		virtual void m_panel5OnPaint( wxPaintEvent& event ) override;
 
 		//virtual void m_button3OnButtonClick( wxCommandEvent& event ) override;
+
+
 
 
 };
