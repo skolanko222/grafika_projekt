@@ -307,7 +307,7 @@ void GUIMyFrame1::m_button3OnButtonClick( wxCommandEvent& event )
 		std::cout << "i: " << i << std::endl;
 		image.Paste(_arrZoomedImages[i], _arrZoomedImages[i].GetWidth()*i, 0);
 	
-	}
+	} 
 	image.SaveFile(output_stream, wxBITMAP_TYPE_BMP);
 	
 }
