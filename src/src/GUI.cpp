@@ -84,14 +84,14 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	
 	bSizerMain->Add( bSizerButtons, 0, wxEXPAND, 5 );
 
-	m_filePicker2 = new wxFilePickerCtrl( this, wxID_ANY, wxEmptyString, wxT("Select a file"), wxT("*.*"), wxDefaultPosition, wxDefaultSize, wxFLP_DEFAULT_STYLE );
-	bSizerButtons->Add( m_filePicker2, 0, wxALL, 5 );
-
-
+	
 	this->SetSizer( bSizerMain );
 	this->Layout();
 
 	this->Centre( wxBOTH );
+
+	m_staticText1 = new wxStaticText(this, wxID_ANY, wxT("To hold zoom borders\nin place click LMB :-) \n"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText1, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
 
 	m_staticText1 = new wxStaticText(this, wxID_ANY, wxT("1.Bilinear interpolation"), wxDefaultPosition, wxDefaultSize, 0);
 	bSizerButtons->Add(m_staticText1, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
@@ -140,7 +140,6 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_slider1->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
 	m_slider1->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
 	m_slider1->Connect( wxEVT_SLIDER, wxCommandEventHandler( MainFrame::m_slider1OnSlider ), NULL, this );
-	m_filePicker2->Connect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::m_filePicker2OnFileChanged ), NULL, this );
 
 }
 
@@ -174,6 +173,5 @@ MainFrame::~MainFrame()
 	m_slider1->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
 	m_slider1->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
 	m_slider1->Disconnect( wxEVT_SLIDER, wxCommandEventHandler( MainFrame::m_slider1OnSlider ), NULL, this );
-	m_filePicker2->Disconnect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::m_filePicker2OnFileChanged ), NULL, this );
 
 }
