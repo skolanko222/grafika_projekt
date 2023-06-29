@@ -93,6 +93,22 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	this->Centre( wxBOTH );
 
+	m_staticText1 = new wxStaticText(this, wxID_ANY, wxT("1.Bilinear interpolation"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText1, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
+
+	m_staticText2 = new wxStaticText(this, wxID_ANY, wxT("2.Bicubic b-spline interpolation"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText2, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
+
+	m_staticText3 = new wxStaticText(this, wxID_ANY, wxT("3.Original image"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText3, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
+
+	m_staticText4 = new wxStaticText(this, wxID_ANY, wxT("4.Lanchos interpolation"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText4, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
+
+	m_staticText5 = new wxStaticText(this, wxID_ANY, wxT("5.Hermit interpolation"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText5, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
+
+
 	// Connect Events
 	m_panel0->Connect( wxEVT_PAINT, wxPaintEventHandler( MainFrame::m_panel0OnPaint ), NULL, this );
 	m_panel0->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( MainFrame::m_panel0OnUpdateUI ), NULL, this );
@@ -125,6 +141,7 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 	m_slider1->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( MainFrame::m_slider1OnScroll ), NULL, this );
 	m_slider1->Connect( wxEVT_SLIDER, wxCommandEventHandler( MainFrame::m_slider1OnSlider ), NULL, this );
 	m_filePicker2->Connect( wxEVT_COMMAND_FILEPICKER_CHANGED, wxFileDirPickerEventHandler( MainFrame::m_filePicker2OnFileChanged ), NULL, this );
+
 }
 
 MainFrame::~MainFrame()

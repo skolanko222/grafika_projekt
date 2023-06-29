@@ -25,6 +25,7 @@
 #include <wx/frame.h>
 #include <wx/filepicker.h>
 #include <wx/wfstream.h>
+#include <wx/stattext.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -47,6 +48,13 @@ class MainFrame : public wxFrame
 		wxButton* m_button3;
 		wxSlider* m_slider1;
 		wxFilePickerCtrl* m_filePicker2;
+
+		wxStaticText* m_staticText1;
+		wxStaticText* m_staticText2;
+		wxStaticText* m_staticText3;
+		wxStaticText* m_staticText4;
+		wxStaticText* m_staticText5;
+
 
 
 	public:
@@ -72,6 +80,7 @@ class MainFrame : public wxFrame
 		virtual void m_slider1OnScroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void m_slider1OnSlider( wxCommandEvent& event ) { event.Skip(); }
 		virtual void m_filePicker2OnFileChanged( wxFileDirPickerEvent& event ) { event.Skip(); }
+
 
 		// prevents flashing panel0
 		void erase_bacground(wxEraseEvent& event) {};

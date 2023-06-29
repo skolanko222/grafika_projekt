@@ -1,0 +1,6 @@
+-Skalowanie bloków na obrazek i samego obrazka
+-usunięcie browse i zrobienie obsługi load i save
+-poprawienie używania lupy i dodanie klawisza z
+-opis klawisza z i okienka z algorytmami
+-zmienienie położenie pierwszego obrazka na środek
+-implementacja algorytmów
