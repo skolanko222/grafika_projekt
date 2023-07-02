@@ -1,6 +1,12 @@
 #include "GUIMyFrame1.h"
 
-//kod do hermita
+/**
+ * @brief Performs Hermite interpolation on the image.
+ * This function applies Hermite interpolation to the provided image, which enhances the quality of the image by smoothing out the pixel values and reducing pixelation. Hermite interpolation is a method of interpolating data points using cubic polynomials.
+ * @param image The input image to be interpolated.
+ * @param factor The factor by which the image is to be interpolated.
+ * @return wxImage interpolated image.
+ */
 wxImage InterpolateImage_Hermit(const wxImage& image, double factor)
 {
     wxImage interpolatedImage(image.GetWidth() * factor, image.GetHeight() * factor);
@@ -48,7 +54,13 @@ wxImage InterpolateImage_Hermit(const wxImage& image, double factor)
     return interpolatedImage;
 }
 
-// Funkcja dokonująca interpolacji metodą Lanczosa
+/**
+ * @brief Performs Lanczos interpolation on the image.
+ * This function applies Lanchos interpolation to the provided image, which is a method of interpolating data points using a combination of cubic interpolation and local weighted averaging. Lanchos interpolation is effective in preserving image details while reducing pixelation and artifacts.
+ * @param image The input image to be interpolated.
+ * @param scaleFactor The factor by which the image is to be interpolated.
+ * @return wxImage interpolated image.
+ */
 wxImage InterpolateImage_Lanchos(const wxImage& image, double scaleFactor)
 {
     int width = image.GetWidth();
@@ -118,7 +130,11 @@ wxImage InterpolateImage_Lanchos(const wxImage& image, double scaleFactor)
  return newImage;  
 }
 
-//Interpolacja dwuliniowa (Bilinear interpolation)
+/**
+ * @brief Performs events and changes in Panel 1. Performs Bilinear interpolation on the image.
+ * This function applies bi-linear interpolation to the provided image, which is a method of interpolating data points using a weighted average of the nearest four pixels. Bi-linear interpolation is commonly used in image processing to upscale or downscale images while preserving smoothness and reducing aliasing artifacts. For the interpolation, the build-in wxWidgets function Scale() is used.
+ * @param event 
+ */
 void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel1);
@@ -137,7 +153,11 @@ void GUIMyFrame1::m_panel1OnPaint( wxPaintEvent& event )
 
 }
 
-//Bicubic interpolation b-spline
+/**
+ * @brief Performs events and changes in Panel 2. Performs Bicubic bi-spline interpolation on the image.
+ * This function applies bicubic B-spline interpolation to the provided image, which is a method of interpolating data points using a cubic B-spline function. Bicubic B-spline interpolation is commonly used in image processing to upscale images while preserving smoothness and reducing artifacts. For the interpolation, the build-in wxWidgets function Scale() is used.
+ * @param event 
+ */
 void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
 {
 
@@ -156,7 +176,11 @@ void GUIMyFrame1::m_panel2OnPaint( wxPaintEvent& event )
 	_arrZoomedImages[1] = image2;
 }
 
-//ORIGINAL OBJECT
+/**
+ * @brief Performs events and changes in Panel 3. Shows original object.
+ * Panel shows original object without interpolation, image when zoomed in is pixelated.
+ * @param event 
+ */
 void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
 {
 
@@ -176,7 +200,11 @@ void GUIMyFrame1::m_panel3OnPaint( wxPaintEvent& event )
 
 }
 
-//Lanczos
+/**
+ * @brief Performs events and changes in Panel 4. Performs Lanchos interpolation on the image.
+ * Code that performs Lanchos interpolation is located in InterpolateImage_Lanchos() function.
+ * @param event 
+ */
 void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel4);
@@ -194,7 +222,11 @@ void GUIMyFrame1::m_panel4OnPaint( wxPaintEvent& event )
 
 }
 
-//Hermit
+/**
+ * @brief Performs events and changes in Panel 5. Performs Hermite interpolation on the image.
+ * Code that performs Hermite interpolation is located in InterpolateImage_Hermit() function.
+ * @param event 
+ */
 void GUIMyFrame1::m_panel5OnPaint( wxPaintEvent& event )
 {
 	wxClientDC dc1(m_panel5);
