@@ -1,11 +1,16 @@
 #include "GUIMyFrame1.h"
 
+/**
+ * @brief Construct a new GUIMyFrame1 object
+ * 
+ * @param parent 
+ */
 GUIMyFrame1::GUIMyFrame1(wxWindow *parent)
 	: MainFrame(parent)
 {
 	_Image.InitStandardHandlers();
 	subImage.InitStandardHandlers();
-	if (!wxFileExists("kotek.bmp"))
+	if (!wxFileExists("kotek.bmp")) // if file doesn't exist, setting default sizes
 	{
 		_Image = wxImage(250, 200);
 		subImage = wxImage(50, 50);
@@ -13,18 +18,22 @@ GUIMyFrame1::GUIMyFrame1(wxWindow *parent)
 			x = wxImage(50, 50);
 		this->SetMinSize(wxSize(250 + 240, 200 + 50 + 100));
 	}
-	else
+	else // if file exists, loading it
 	{
 		_Image.LoadFile("kotek.bmp");
 		loaded = true;
 	}
-	setPanelsOnLoad();
-	lupaX = _width / 2;
-	lupaY = _height / 2;
+	setPanelsOnLoad(); // calling function calculating all necessary params
 	m_slider1->SetValue(0);
 	m_panel0->Bind(wxEVT_MOTION, GUIMyFrame1::Mouse_Move, this);
 	m_panel0->Bind(wxEVT_LEFT_DOWN, GUIMyFrame1::LMB_click, this);
 }
+/**
+ * @brief Function called when panel0 is repainted
+ *			panel0 - main image panel  	
+ *
+ * @param event 
+ */
 void GUIMyFrame1::m_panel0OnPaint(wxPaintEvent &event)
 {
 
@@ -46,12 +55,21 @@ void GUIMyFrame1::m_panel0OnPaint(wxPaintEvent &event)
 	dc.DrawLine(lupaX - lupaHeight / 2., lupaY + lupaWidth / 2., lupaX + lupaHeight / 2., lupaY + lupaWidth / 2.);
 	dc.DrawLine(lupaX + lupaHeight / 2., lupaY - lupaWidth / 2., lupaX + lupaHeight / 2., lupaY + lupaWidth / 2.);
 }
-
+/**
+ * @brief  Function called when size of UI is changed
+ * 
+ * @param event 
+ */
 void GUIMyFrame1::m_panel0OnUpdateUI(wxUpdateUIEvent &event)
 {
 	setPanelSize();
 }
 
+/**
+ * @brief Function called when left mouse button is clicked - to hold zoom in place
+ * 
+ * @param event 
+ */
 void GUIMyFrame1::LMB_click(wxMouseEvent &event)
 {
 	if (LMB_clicked)
@@ -62,7 +80,11 @@ void GUIMyFrame1::LMB_click(wxMouseEvent &event)
 	lupaImageCrop();
 	Refresh();
 }
-
+/**
+ * @brief Function called when mouse is moved
+ * 
+ * @param event 
+ */
 void GUIMyFrame1::Mouse_Move(wxMouseEvent &event)
 {
 	size mX_temp = event.GetX();
@@ -80,7 +102,12 @@ void GUIMyFrame1::Mouse_Move(wxMouseEvent &event)
 	lupaImageCrop();
 	Refresh();
 }
-
+/**
+ * @brief Function called when slider is scrolled
+ * 			 - changes zoom factor	
+ * 
+ * @param event 
+ */
 void GUIMyFrame1::m_slider1OnScroll(wxScrollEvent &event)
 {
 	cropFactor = 1. - event.GetPosition() / 200.;
@@ -116,6 +143,9 @@ void GUIMyFrame1::m_slider1OnScroll(wxScrollEvent &event)
  */
 void GUIMyFrame1::setPanelsOnLoad(wxString path)
 {
+	lupaX = _width / 2;
+	lupaY = _height / 2;
+
 	_height = _Image.GetHeight();
 	_width = _Image.GetWidth();
 
@@ -144,7 +174,10 @@ void GUIMyFrame1::setPanelsOnLoad(wxString path)
 	lupaImageCrop();
 	Refresh();
 }
-
+/**
+ * @brief function cropping image to zoom
+ * 
+ */
 void GUIMyFrame1::lupaImageCrop()
 {
 
@@ -173,20 +206,24 @@ void GUIMyFrame1::lupaImageCrop()
 
 	subImage = _Image.GetSubImage(lupaRect);
 }
-
+/**
+ * @brief setter of panels size
+ * 
+ */
 void GUIMyFrame1::setPanelSize()
 {
 	m_panel0->SetSize(_p0size);
 	m_panel1->SetSize(_pDownSize);
-	// m_panel1->SetPosition(m_panel1->GetPosition() + wxPoint(0, 10));
 	m_panel2->SetSize(_pDownSize);
 	m_panel3->SetSize(_pDownSize);
 	m_panel4->SetSize(_pDownSize);
 	m_panel5->SetSize(_pDownSize);
 }
-GUIMyFrame1::~GUIMyFrame1()
-{
-}
+/**
+ * @brief Function called when save button is cliced
+ * 
+ * @param event 
+ */
 void GUIMyFrame1::m_button3OnButtonClick(wxCommandEvent &event)
 {
 	wxFileDialog saveFileDialog(this, _("Save BMP file"), "", "", "BMP files (*.bmp)|*.bmp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
@@ -203,7 +240,11 @@ void GUIMyFrame1::m_button3OnButtonClick(wxCommandEvent &event)
 	}
 	image.SaveFile(output_stream, wxBITMAP_TYPE_BMP);
 }
-
+/**
+ * @brief Function called when load button is clicked
+ * 
+ * @param event 
+ */
 void GUIMyFrame1::m_button2OnButtonClick(wxCommandEvent &event)
 {
 	wxFileDialog openFileDialog(this, _("Open BMP file"), "", "", "BMP files (*.bmp)|*.bmp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);

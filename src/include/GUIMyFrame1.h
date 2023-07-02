@@ -21,8 +21,9 @@ class GUIMyFrame1 : public MainFrame
 	public:
 		/** Constructor */
 		GUIMyFrame1( wxWindow* parent );
+		~GUIMyFrame1() {};
 	//// end generated class members
-		~GUIMyFrame1();
+		
 	protected:
 		using size = short unsigned int;
 
@@ -32,7 +33,7 @@ class GUIMyFrame1 : public MainFrame
 		wxSize _p0size = wxSize(_width, _height); // main panel size
 		wxSize _pDownSize = wxSize(wxDefaultSize.GetWidth(), wxDefaultSize.GetHeight()); // zoom panel size
 
-		// center position of lupa
+		// center position of zoom
 		size lupaX;
 		size lupaY;
 
