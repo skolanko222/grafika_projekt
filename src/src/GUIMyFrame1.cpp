@@ -226,9 +226,7 @@ void GUIMyFrame1::setPanelSize()
  */
 void GUIMyFrame1::m_button3OnButtonClick(wxCommandEvent &event)
 {
-	wxString cwd = wxGetCwd();
-
-	wxFileDialog saveFileDialog(this, _("Save BMP file"), cwd, "", "BMP files (*.bmp)|*.bmp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	wxFileDialog saveFileDialog(this, _("Save BMP file"), wxGetCwd(), "", "BMP files (*.bmp)|*.bmp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 	if (saveFileDialog.ShowModal() == wxID_CANCEL)
 		return;
 	wxFileOutputStream output_stream(saveFileDialog.GetPath());
@@ -249,8 +247,7 @@ void GUIMyFrame1::m_button3OnButtonClick(wxCommandEvent &event)
  */
 void GUIMyFrame1::m_button2OnButtonClick(wxCommandEvent &event)
 {
-	wxString cwd = wxGetCwd();
-	wxFileDialog openFileDialog(this, _("Open BMP file"), cwd, "", "BMP files (*.bmp)|*.bmp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+	wxFileDialog openFileDialog(this, _("Open BMP file"), wxGetCwd(), "", "BMP files (*.bmp)|*.bmp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 	if (openFileDialog.ShowModal() == wxID_CANCEL)
 		return;
 
