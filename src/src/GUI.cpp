@@ -90,8 +90,8 @@ MainFrame::MainFrame( wxWindow* parent, wxWindowID id, const wxString& title, co
 
 	this->Centre( wxBOTH );
 
-	m_staticText1 = new wxStaticText(this, wxID_ANY, wxT("To hold zoom borders\nin place click LMB :-) \n"), wxDefaultPosition, wxDefaultSize, 0);
-	bSizerButtons->Add(m_staticText1, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
+	m_staticText0 = new wxStaticText(this, wxID_ANY, wxT("To hold zoom borders\nin place click LMB :-) \n"), wxDefaultPosition, wxDefaultSize, 0);
+	bSizerButtons->Add(m_staticText0, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);
 
 	m_staticText1 = new wxStaticText(this, wxID_ANY, wxT("1.Bilinear interpolation"), wxDefaultPosition, wxDefaultSize, 0);
 	bSizerButtons->Add(m_staticText1, 0, wxALL | wxALIGN_CENTER_HORIZONTAL, 5);

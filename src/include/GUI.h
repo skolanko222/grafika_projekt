@@ -48,7 +48,7 @@ class MainFrame : public wxFrame
 		wxButton* m_button3;
 		wxSlider* m_slider1;
 		wxFilePickerCtrl* m_filePicker2;
-
+		wxStaticText* m_staticText0;
 		wxStaticText* m_staticText1;
 		wxStaticText* m_staticText2;
 		wxStaticText* m_staticText3;
